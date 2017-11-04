@@ -140,21 +140,9 @@ func Acos(v1 Vector, v2 Vector) float64 {
 	return math.Acos(dotProduct / scalarProduct)
 }
 
-// NormAcos is a normalised measure of similarity between vectors.
-func NormAcos(v1 Vector, v2 Vector) float64 {
-	v1 = v1.Times(1 / v1.Magnitude())
-	v2 = v2.Times(1 / v2.Magnitude())
-	return math.Acos(Dot(v1, v2))
-}
-
 // Similarity is a convenience function for Cos(Acos(v1, v2)).
 func Similarity(v1 Vector, v2 Vector) float64 {
 	return math.Cos(Acos(v1, v2))
-}
-
-// NormalizedSimilarity is Similarity except normalized.
-func NormalizedSimilarity(v1 Vector, v2 Vector) float64 {
-	return math.Cos(NormAcos(v1, v2))
 }
 
 // NewVector constructs a blank Vector with dim number of dimensions.
