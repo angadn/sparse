@@ -65,8 +65,22 @@ func (v Vector) Times(scalar float64) Vector {
 	return ret
 }
 
+// Reduce Vector to just non-zero dimensions.
+func (v Vector) reduce() Vector {
+	ret := v.clone()
+	for n, d := range ret.data {
+		if d == 0 {
+			delete(ret.data, n)
+		}
+	}
+
+	return ret
+}
+
 // Equals checks if this Vector is equal to another.
 func (v Vector) Equals(other Vector) bool {
+	v = v.reduce()
+	other = other.reduce()
 	if len(v.data) == len(other.data) {
 		for n, d1 := range v.data {
 			if d2, ok := other.data[n]; !ok || d1 != d2 {
