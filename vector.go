@@ -65,6 +65,21 @@ func (v Vector) Times(scalar float64) Vector {
 	return ret
 }
 
+// Equals checks if this Vector is equal to another.
+func (v Vector) Equals(other Vector) bool {
+	if len(v.data) == len(other.data) {
+		for n, d1 := range v.data {
+			if d2, ok := other.data[n]; !ok || d1 != d2 {
+				return false
+			}
+		}
+
+		return true
+	}
+
+	return false
+}
+
 func (v Vector) String() string {
 	return fmt.Sprintf("%v", v.data)
 }
